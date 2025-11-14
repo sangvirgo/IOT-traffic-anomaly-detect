@@ -36,6 +36,17 @@ project/
 
 ## 🚀 Quick Start
 
+### Requirement
+```bash
+pip install pandas numpy scikit-learn imbalanced-learn matplotlib seaborn
+
+# For deep learning:
+pip install tensorflow  # For CNN/LSTM
+
+# For GNN:
+pip install torch torch-geometric
+```
+
 ### Step 1: Clean Raw Data
 
 ```bash
