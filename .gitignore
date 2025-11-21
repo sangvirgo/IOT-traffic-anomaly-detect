@@ -3,4 +3,6 @@ cleaned_data
 split_data
 hi
 venv
-
+/__pycache__/
+*.pyc
+/myenv/
