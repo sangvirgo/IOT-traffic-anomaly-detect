@@ -63,10 +63,7 @@ python clean_cicids.py \
     --mode gnn
 
 # Only for CNN/LSTM (removes IP addresses)
-python clean_cicids.py \
-    --input_dir ./raw_data \
-    --output_dir ./cleaned_data \
-    --mode cnn_lstm
+python ./pretrain/clean_cicids.py --input_dir ./raw_data --output_dir ./cleaned_data --mode cnn_lstm
 ```
 
 **What it does:**
@@ -83,29 +80,7 @@ python clean_cicids.py \
 
 ```bash
 # Temporal split (recommended for time-series data)
-python split_data.py \
-    --input_dir ./cleaned_data/for_cnn_lstm \
-    --output_dir ./split_data \
-    --temporal
-
-# Random stratified split
-python split_data.py \
-    --input_dir ./cleaned_data/for_cnn_lstm \
-    --output_dir ./split_data
-
-# Without class balancing
-python split_data.py \
-    --input_dir ./cleaned_data/for_cnn_lstm \
-    --output_dir ./split_data \
-    --temporal \
-    --no_balance
-
-# Without normalization
-python split_data.py \
-    --input_dir ./cleaned_data/for_cnn_lstm \
-    --output_dir ./split_data \
-    --temporal \
-    --no_normalize
+python ./pretrain/split_data.py --input_dir ./cleaned_data/ --output_dir ./split_data --temporal
 ```
 
 **What it does:**
@@ -118,16 +93,16 @@ python split_data.py \
 
 ```bash
 # Inspect cleaned files
-python utils.py --inspect --data_dir ./cleaned_data/for_cnn_lstm
+python ./pretrain/utils.py --inspect --data_dir ./cleaned_data/
 
 # Inspect split data
-python utils.py --inspect --data_dir ./split_data
+python ./pretrain/utils.py --inspect --data_dir ./split_data
 
 # Visualize label distribution
-python utils.py --visualize --data_dir ./split_data
+python ./pretrain/utils.py --visualize --data_dir ./split_data
 
 # Show feature statistics
-python utils.py --statistics --data_dir ./split_data
+python ./pretrain/utils.py --statistics --data_dir ./split_data
 ```
 
 ## 📊 Label Mapping
