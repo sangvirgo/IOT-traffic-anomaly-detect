@@ -1,3 +1,4 @@
+# Basic dependencies
 pandas>=2.0.0
 numpy>=1.24.0
 scikit-learn>=1.3.0
@@ -5,3 +6,17 @@ scipy>=1.11.0
 imbalanced-learn>=0.11.0
 matplotlib>=3.7.0
 seaborn>=0.12.0
+
+# PyTorch (cài trước)
+torch>=2.0.0
+torchvision>=0.15.0
+
+# PyTorch Geometric (cài sau)
+torch-geometric>=2.3.0
+
+# Optional: Pre-built wheels cho torch-scatter, torch-sparse, etc.
+# Uncomment nếu cần:
+# --find-links https://data.pyg.org/whl/torch-2.9.0+cpu.html
+# torch-scatter
+# torch-sparse
+# torch-cluster
