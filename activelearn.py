@@ -14,10 +14,7 @@ class ActiveLearningEngine:
                  approach_name='Unknown'):
         self.graph_data = graph_data
         self.true_labels = true_labels.copy()
-        
-        # ✅ FIX: Use graph nodes, not original samples
-        self.n_samples = graph_data.num_nodes  # Changed from len(true_labels)
-        
+        self.n_samples = graph_data.num_nodes
         self.device = graph_data.x.device
         self.approach_name = approach_name
         
@@ -38,14 +35,8 @@ class ActiveLearningEngine:
             'test_auc': [],
             'train_time': []
         }
-        
-        print(f"\n✓ Active Learning Engine initialized:")
-        print(f"  Graph nodes: {self.n_samples:,}")
-        print(f"  Initial budget: {self.initial_budget:,} ({initial_budget*100:.1f}%)")
-        print(f"  Query budget: {self.query_budget:,} ({query_budget*100:.1f}%)")
     
     def initial_labeling(self, strategy='stratified'):
-        # ✅ Use graph labels (y), not original labels
         labels = self.graph_data.y.cpu().numpy()
         
         if strategy == 'stratified':
@@ -53,7 +44,6 @@ class ActiveLearningEngine:
             attack_idx = np.where(labels == 1)[0]
             
             if len(benign_idx) == 0 or len(attack_idx) == 0:
-                print(f"  ⚠️  Warning: Only one class found. Using random sampling.")
                 initial_indices = np.random.choice(self.n_samples, 
                                                   min(self.initial_budget, self.n_samples), 
                                                   replace=False)
@@ -64,7 +54,6 @@ class ActiveLearningEngine:
                 n_benign = int(self.initial_budget * benign_ratio)
                 n_attack = self.initial_budget - n_benign
                 
-                # Make sure we don't sample more than available
                 n_benign = min(n_benign, len(benign_idx))
                 n_attack = min(n_attack, len(attack_idx))
                 
@@ -79,8 +68,6 @@ class ActiveLearningEngine:
         
         self.train_mask[initial_indices] = True
         self.test_mask[initial_indices] = False
-        
-        print(f"  ✓ Initial labeled: {len(initial_indices):,}/{self.n_samples:,} ({len(initial_indices)/self.n_samples*100:.1f}%)")
     
     def train_model(self, epochs=50, lr=0.01, verbose=True):
         model = GCN_IDS(input_dim=self.graph_data.x.shape[1], hidden_dim=64).to(self.device)
@@ -167,15 +154,14 @@ class ActiveLearningEngine:
         return uncertain_idx.cpu().numpy()
     
     def run(self, al_strategy='entropy', verbose=True):
-        print(f"\n{'='*70}")
-        print(f"Active Learning: {self.approach_name}")
-        print(f"Strategy: {al_strategy} | Dataset: {self.n_samples:,} nodes")
-        print(f"{'='*70}")
+        print(f"\nActive Learning: {self.approach_name} | Strategy: {al_strategy} | Nodes: {self.n_samples:,}")
         
         self.initial_labeling(strategy='stratified')
+        print(f"Initial labels: {self.train_mask.sum():,} ({self.train_mask.sum()/self.n_samples*100:.1f}%)")
         
         for round_idx in range(self.n_rounds):
-            print(f"\nRound {round_idx + 1}/{self.n_rounds} - Labeled: {self.train_mask.sum():,}/{self.n_samples:,} ({self.train_mask.sum()/self.n_samples*100:.1f}%)")
+            labeled_pct = self.train_mask.sum()/self.n_samples*100
+            print(f"\nRound {round_idx + 1}/{self.n_rounds} ({labeled_pct:.1f}% labeled)")
             
             start_time = time.time()
             model = self.train_model(epochs=50, verbose=verbose)
@@ -183,7 +169,7 @@ class ActiveLearningEngine:
             
             test_acc, test_f1, test_auc = self.evaluate(model)
             
-            print(f"Results: Acc={test_acc:.4f}, F1={test_f1:.4f}, AUC={test_auc:.4f}, Time={train_time:.1f}s")
+            print(f"Acc={test_acc:.4f} | F1={test_f1:.4f} | AUC={test_auc:.4f} | Time={train_time:.1f}s")
             
             self.history['round'].append(round_idx + 1)
             self.history['labeled_count'].append(self.train_mask.sum().item())
@@ -198,12 +184,6 @@ class ActiveLearningEngine:
                 self.train_mask[uncertain_idx] = True
                 self.test_mask[uncertain_idx] = False
         
-        print(f"\n{'='*70}")
-        print(f"Final - {self.approach_name}:")
-        print(f"  Labeled: {self.train_mask.sum():,}/{self.n_samples:,} ({self.train_mask.sum()/self.n_samples*100:.1f}%)")
-        print(f"  Accuracy: {self.history['test_acc'][-1]:.4f}")
-        print(f"  F1 Score: {self.history['test_f1'][-1]:.4f}")
-        print(f"  AUC-ROC: {self.history['test_auc'][-1]:.4f}")
-        print(f"{'='*70}")
+        print(f"\nFinal: Acc={self.history['test_acc'][-1]:.4f} | F1={self.history['test_f1'][-1]:.4f} | AUC={self.history['test_auc'][-1]:.4f}")
         
         return self.history, model
