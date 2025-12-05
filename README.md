@@ -3,7 +3,7 @@
 Complete pipeline for cleaning, splitting, and preparing CICIDS2018 dataset for GNN, CNN, and LSTM models.
 
 ## 📁 Project Structure
-
+venv\Scripts\activate
 ```
 project/
 ├── raw_data/                    # Raw CSV files từ CICIDS2018
