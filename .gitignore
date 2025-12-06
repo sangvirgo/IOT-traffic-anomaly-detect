@@ -8,3 +8,4 @@ venv
 /myenv/
 kfold_splits
 /results/
+time_split
