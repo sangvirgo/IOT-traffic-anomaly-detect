@@ -1,4 +1,0 @@
-Model,Architecture,Accuracy,F1-Score,AUC,Approach
-CNN (Dense),Dense layers,0.8241,0.7052,0.8821,Spatial features
-LSTM (Hybrid),Conv1D + Bi-LSTM,0.9435111111111111,0.9704329215809431,0.9410207092253812,Spatial + Temporal
-Improvement,-,+11.94%,+26.52%,+5.89%,-
