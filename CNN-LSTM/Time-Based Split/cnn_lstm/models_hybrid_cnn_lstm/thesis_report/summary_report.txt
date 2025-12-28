@@ -1,0 +1,47 @@
+
+MODEL: Hybrid CNN-LSTM with Attention Mechanism
+
+DATASET: CICIDS2018
+- Test samples: 45,000
+- Benign: 31,344 (69.65%)
+- Attack: 13,656 (30.35%)
+
+ARCHITECTURE:
+- Component 1: CNN (Conv1D) - Spatial feature extraction
+- Component 2: Bidirectional LSTM - Temporal pattern learning
+- Component 3: Attention Mechanism - Timestep weighting
+- Component 4: Residual Connection - Gradient flow improvement
+- Total Parameters: 99,778
+
+PERFORMANCE METRICS:
+- Accuracy:     87.48%
+- Precision:    74.23%
+- Recall:       89.97%
+- F1-Score:     81.35%
+- AUC-ROC:      93.06%
+
+CONFUSION MATRIX:
+                Predicted
+              Benign    Attack
+Actual Benign   27,079    4,265
+       Attack    1,370   12,286
+
+KEY FINDINGS:
+- Achieved 87.48% accuracy, outperforming baseline CNN by 4.69%
+- F1-Score of 81.35% demonstrates balanced precision-recall trade-off
+- High recall (89.97%) ensures most attacks are detected (critical for IDS)
+- AUC-ROC of 93.06% indicates excellent discrimination capability
+- Hybrid approach effectively combines spatial and temporal learning
+
+FILES GENERATED:
+✓ test_metrics.csv - All performance metrics
+✓ confusion_matrix.csv - Confusion matrix data
+✓ classification_report.csv - Detailed classification report
+✓ confusion_matrix.png/pdf - Confusion matrix visualization
+✓ roc_curve.png/pdf - ROC curve plot
+✓ metrics_comparison.png/pdf - Metrics bar chart
+✓ model_comparison.csv - Comparison with baselines
+✓ model_comparison_chart.png/pdf - Comparison visualization
+✓ test_results.json - Comprehensive results (JSON)
+✓ test_results.pkl - Comprehensive results (pickle)
+✓ latex_table.tex - LaTeX table for thesis

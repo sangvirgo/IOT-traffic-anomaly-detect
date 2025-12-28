@@ -1,0 +1,51 @@
+{
+  "model": "Hybrid CNN-LSTM with Attention",
+  "total_parameters": 99778,
+  "optimal_batch_size": 512,
+  "optimal_performance": {
+    "latency_ms": 0.19891687734374663,
+    "std_latency": 0.0027110259227249877,
+    "throughput": 5027.225509235741
+  },
+  "capability": "Real-time",
+  "network_capacity": "Sub-Gbps",
+  "production_ready": true,
+  "all_measurements": [
+    {
+      "batch_size": 1,
+      "latency_ms": 58.11190400000896,
+      "std_latency": 1.0063810997819258,
+      "throughput": 17.2081782073402
+    },
+    {
+      "batch_size": 16,
+      "latency_ms": 3.697564181250357,
+      "std_latency": 0.1039584994957269,
+      "throughput": 270.44831434456484
+    },
+    {
+      "batch_size": 64,
+      "latency_ms": 0.9248000015622537,
+      "std_latency": 0.022410511469687002,
+      "throughput": 1081.3148770660812
+    },
+    {
+      "batch_size": 256,
+      "latency_ms": 0.30486461289065403,
+      "std_latency": 0.005502473270954662,
+      "throughput": 3280.144555047688
+    },
+    {
+      "batch_size": 512,
+      "latency_ms": 0.19891687734374663,
+      "std_latency": 0.0027110259227249877,
+      "throughput": 5027.225509235741
+    },
+    {
+      "batch_size": 1024,
+      "latency_ms": 0.14720029335939522,
+      "std_latency": 0.0015801054919881723,
+      "throughput": 6793.464721965338
+    }
+  ]
+}

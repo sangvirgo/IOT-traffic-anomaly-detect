@@ -1,0 +1,32 @@
+{
+  "model_name": "Hybrid CNN-LSTM with Attention",
+  "dataset": "CICIDS2018",
+  "test_samples": 45000,
+  "optimal_threshold": 0.5000000000000002,
+  "metrics": {
+    "accuracy": 0.8747777777777778,
+    "precision": 0.7423116428010392,
+    "recall": 0.8996777973052138,
+    "f1_score": 0.8134538352037608,
+    "auc_roc": 0.9305579011654559,
+    "specificity": 0.8639293006636038,
+    "fpr": 0.13607069933639612,
+    "fnr": 0.10032220269478617,
+    "npv": 0.9518436500404233
+  },
+  "confusion_matrix": {
+    "true_negative": 27079,
+    "false_positive": 4265,
+    "false_negative": 1370,
+    "true_positive": 12286
+  },
+  "architecture": {
+    "components": [
+      "CNN (Conv1D)",
+      "Bidirectional LSTM",
+      "Attention",
+      "Residual"
+    ],
+    "total_parameters": 99778
+  }
+}

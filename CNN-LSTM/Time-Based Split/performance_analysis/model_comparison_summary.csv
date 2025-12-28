@@ -1,0 +1,2 @@
+Model,Latency (ms),Throughput (samples/sec),Batch Size
+Hybrid CNN-LSTM,0.2021453535156148,4946.935374019144,512
