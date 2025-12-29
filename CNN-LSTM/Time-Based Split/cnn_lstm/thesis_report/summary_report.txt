@@ -26,22 +26,37 @@ CONFUSION MATRIX:
 Actual Benign   27,079    4,265
        Attack    1,370   12,286
 
+COMPARISON WITH BASELINE MODELS:
+┌──────────────────────┬──────────┬──────────┬──────────┐
+│ Model                │ Accuracy │ F1-Score │ AUC-ROC  │
+├──────────────────────┼──────────┼──────────┼──────────┤
+│ CNN only             │  82.79%  │  76.01%  │  88.87%  │
+│ LSTM only            │  87.13%  │  80.77%  │  93.18%  │
+│ Hybrid CNN-LSTM      │  87.48% │  81.35% │  93.06% │
+└──────────────────────┴──────────┴──────────┴──────────┘
+
 KEY FINDINGS:
-- Achieved 87.48% accuracy, outperforming baseline CNN by 4.69%
+- Achieved 87.48% accuracy, outperforming CNN by 4.69%
 - F1-Score of 81.35% demonstrates balanced precision-recall trade-off
 - High recall (89.97%) ensures most attacks are detected (critical for IDS)
 - AUC-ROC of 93.06% indicates excellent discrimination capability
 - Hybrid approach effectively combines spatial and temporal learning
+- Attention mechanism improves interpretability by highlighting important timesteps
+
+IMPROVEMENTS OVER BASELINES:
+• vs CNN only:   Accuracy +4.69%, F1 +5.34%
+• vs LSTM only:  Accuracy +0.35%, F1 +0.58%
 
 FILES GENERATED:
 ✓ test_metrics.csv - All performance metrics
 ✓ confusion_matrix.csv - Confusion matrix data
 ✓ classification_report.csv - Detailed classification report
 ✓ confusion_matrix.png/pdf - Confusion matrix visualization
+✓ confusion_matrix_normalized.png - Normalized confusion matrix
 ✓ roc_curve.png/pdf - ROC curve plot
 ✓ metrics_comparison.png/pdf - Metrics bar chart
-✓ model_comparison.csv - Comparison with baselines
-✓ model_comparison_chart.png/pdf - Comparison visualization
+✓ model_comparison.csv - Comparison with CNN & LSTM baselines
+✓ model_comparison_chart.png/pdf - 3-model comparison visualization
 ✓ test_results.json - Comprehensive results (JSON)
 ✓ test_results.pkl - Comprehensive results (pickle)
-✓ latex_table.tex - LaTeX table for thesis
+✓ latex_table.tex - LaTeX tables for thesis
