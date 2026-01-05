@@ -10,3 +10,4 @@ kfold_splits
 /results/
 time_split
 data_cleaned
+/saved_gnn/
