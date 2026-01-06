@@ -112,13 +112,13 @@ Examples:
     cnn_group.add_argument(
         "--cnn-model", 
         type=str,
-        default="./CNN-LSTM/Time-Based Split/cnn+lstm/hybrid_cnn+lstm_best.keras",
+        default="./CNN-LSTM/Time-Based Split/cnn_lstm/hybrid_cnn_lstm_best.keras",
         help="Path to CNN-LSTM model file"
     )
     cnn_group.add_argument(
         "--cnn-scaler", 
         type=str,
-        default="./CNN-LSTM/Time-Based Split/cnn+lstm/scaler.pkl",
+        default="./CNN-LSTM/Time-Based Split/cnn_lstm/scaler.pkl",
         help="Path to CNN-LSTM scaler file"
     )
     
